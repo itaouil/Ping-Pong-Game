@@ -1,0 +1,34 @@
+/* Playground */
+#playground {
+  background: #e0ffe0 url(../images/pixel_grid.jpg);
+  width: 400px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ping Pong Ball */
+#ball {
+  background: #fbb;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 150px;
+  top: 100px;
+  border-radius: 10px;
+}
+
+/* Common class paddle */
+.paddle {
+  background: #bbf;
+  left: 50px;
+  top: 70px;
+  position: absolute;
+  width: 30px;
+  height: 70px;
+}
+
+/* PaddleB offsetting */
+#paddleB {
+  left: 320px;
+}
