@@ -16,4 +16,4 @@ The key points in the code are the following:
 
 3. **Collision detection (still wonky though) :).**
 
-![alt text](https://github.com/itaouil95/Ping-Pong-Game/ping-pong.png)
+![alt text](https://github.com/itaouil95/Ping-Pong-Game/blob/master/ping-pong.png)
