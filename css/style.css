@@ -1,8 +1,23 @@
+h1,
+footer,
+#scoreboard {
+  text-align: center;
+}
+
+footer {
+  margin-top: 20px;
+}
+
+#scoreboard {
+  margin-bottom: 20px;
+}
+
 /* Playground */
 #playground {
   background: #e0ffe0;
   width: 400px;
   height: 200px;
+  margin: 0 auto;
   position: relative;
   overflow: hidden;
 }

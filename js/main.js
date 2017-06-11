@@ -14,6 +14,8 @@ $(function() {
     directionY : 1,
     size       : 20
   }
+  pingpong.scoreA = 0;
+  pingpong.scoreB = 0;
 
   // Key Codes
   const KEY = {
@@ -93,17 +95,63 @@ $(function() {
 
     // Check playground boundaries (right)
     if (ball.x > playgroundWidth - ball.size) {
+      // Player B lost
+      // Reset Ball
+      ball.x = 250;
+      ball.y = 100;
+      $('#ball').css({
+        'left': ball.x,
+        'top' : ball.y
+      });
+
+      // Increment Player A score
+      // and update DOM
+      pingpong.scoreA++;
+      $('#scoreA').html(pingpong.scoreA);
+
       ball.directionX = -1;
     }
 
     // Check playground boundaries (left)
     if (ball.x < 0) {
+      // Player A lost
+      // Reset Ball
+      ball.x = 150;
+      ball.y = 100;
+      $('#ball').css({
+        'left': ball.x,
+        'top' : ball.y
+      });
+
+      // Increment Player B score
+      // and update DOM
+      pingpong.scoreB++;
+      $('#scoreA').html(pingpong.scoreB);
+
       ball.directionX = 1;
     }
 
     // Update ball position
     ball.x += ball.speed * ball.directionX;
     ball.y += ball.speed * ball.directionY;
+
+    // Ball Collision Detection with left paddle
+    var paddleAX = parseInt(paddleA.css('left')) + parseInt(paddleA.css('width'));
+    var paddleAYBottom = parseInt(paddleA.css('top')) + parseInt(paddleA.css('height'));
+    var paddleAYTop = parseInt(paddleA.css('top'));
+
+    if (ball.x <= paddleAX && ball.y <= paddleAYBottom && ball.y  >= paddleAYTop) {
+      ball.directionX = 1;
+    }
+
+    // Ball Collision Detection with right paddle
+    var paddleBX = parseInt(paddleB.css('left'));
+    var paddleBYBottom = parseInt(paddleB.css('top')) + parseInt(paddleB.css('height'));
+    var paddleBYTop = parseInt(paddleB.css('top'));
+
+    if (ball.x >= paddleBX - ball.size && ball.y <= paddleBYBottom && ball.y >= paddleBYTop) {
+      ball.directionX = -1;
+    }
 
     // Update CSS
     $('#ball').css({
