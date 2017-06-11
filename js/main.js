@@ -2,14 +2,18 @@ $(function() {
 
   // Globals
   var pingpong = {};
-
-  // Keystroke container
   pingpong.pressedKeys = [];
-
-  // Interval function
   pingpong.timer = setInterval(() => {
     gameLoop();
   }, 30);
+  pingpong.ball = {
+    speed      : 5,
+    x          : 150,
+    y          : 100,
+    directionX : 1,
+    directionY : 1,
+    size       : 20
+  }
 
   // Key Codes
   const KEY = {
@@ -36,6 +40,7 @@ $(function() {
 
   // Game Loop
   var gameLoop = () => {
+    moveBall();
     movePaddles();
   }
 
@@ -67,5 +72,45 @@ $(function() {
     }
 
   };
+
+  // Move Ball function
+  var moveBall = () => {
+
+    // References
+    const playgroundHeight = parseInt($('#playground').height());
+    const playgroundWidth = parseInt($('#playground').width());
+    const ball = pingpong.ball;
+
+    // Check playground boundaries (bottom)
+    if (ball.y > playgroundHeight - ball.size) {
+      ball.directionY = -1;
+    }
+
+    // Check playground boundaries (top)
+    if (ball.y < 0) {
+      ball.directionY = 1;
+    }
+
+    // Check playground boundaries (right)
+    if (ball.x > playgroundWidth - ball.size) {
+      ball.directionX = -1;
+    }
+
+    // Check playground boundaries (left)
+    if (ball.x < 0) {
+      ball.directionX = 1;
+    }
+
+    // Update ball position
+    ball.x += ball.speed * ball.directionX;
+    ball.y += ball.speed * ball.directionY;
+
+    // Update CSS
+    $('#ball').css({
+      'left': ball.x,
+      'top' : ball.y
+    });
+
+  }
 
 });
